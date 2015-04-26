@@ -230,37 +230,49 @@ public:
 		root._PostorderRecursive(list);
 	}
 
+
 	void PreorderIterative(p2List<TYPE> list)
 	{
 		assert(list);
 
 		p2Stack<TreeNode<TYPE>*> stack;
-		TreeNode<TYPE>* node = &root;
+		TreeNode<TYPE>* node;
+		p2List_item<TYPE*>* progenitors;
 
-		unsigned int max;
+		stack.Push(root);
 
-		p2List_item<TreeNode<TYPE>*>* tmp;
-
-		while (node != NULL || stack.Pop(node))
+		while (stack.Pop(node))
 		{
-			list->add(node);
+			
+			list.add(node->data);
 
-			max = node->sons.count();
-
-			if (max > 0)
+			for (progenitors = node->sons.end; progenitors != NULL; progenitors = progenitors->prev)
 			{
-				tmp = node->sons.end;
-
-				for (unsigned int i = 0; i < max; i++, tmp = tmp->next)
-				{
-					stack.Push(tmp->data);
-				}
-
+				stack.Push(progenitors);
 			}
+		}
+	}
 
-				node = (tmp != NULL) ? tmp->data : NULL;
+	void PostorderIterative(p2List<TYPE> list)
+	{
+		assert(list);
+
+		p2Stack<TreeNode<TYPE>*> stack;
+		TreeNode<TYPE>* node;
+		p2List_item<TYPE*>* father;
+
+		stack.Push(root);
+
+		while (stack.Pop(node))
+		{
+			list.find(node);
+
+			for (father = node->sons.end; father != NULL; father = father->prev)
+			{
+				stack.Push(father);
 			}
-
+			
+		}
 	}
 
 };

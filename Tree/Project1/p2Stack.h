@@ -79,6 +79,11 @@ public:
 		return num_elements;
 	}
 
+	bool empty()
+	{
+		return num_elements == 0;
+	}
+
 private:
 
 	// Private Utils
