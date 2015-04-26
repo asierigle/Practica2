@@ -1,8 +1,7 @@
 #ifndef __p2Stack_H__
 #define __p2Stack_H__
 
-#include "p2Defs.h"
-
+#define MIN( a, b ) ( ((a) < (b)) ? (a) : (b) )
 #define STACK_BLOCK_SIZE 16
 
 template<class VALUE>

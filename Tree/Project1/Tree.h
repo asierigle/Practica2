@@ -41,7 +41,7 @@ public:
 	//Constructors
 	TreeNode(const TYPE& data) :  father(NULL) 
 	{
-		assert(data); ç
+		assert(data); 
 
 			this->data = data;
 	} 
@@ -150,9 +150,12 @@ private:
 
 public:
 	//Constructors
-	Tree(){}
+	Tree(const TYPE& data)
+	{
+		assert(data);
 
-	Tree(const TYPE& root) : root(data) {}
+		root.data = data;
+	}
 
 	//Destructor
 	virtual ~Tree()
@@ -171,15 +174,10 @@ public:
 	{
 		assert(data);
 
-		if (father == NULL)
-		{
-			root.AppendSon(new TreeNode<TYPE>(data)); // add child if father is undefined
-			return true;
-		}
 		//if father = root, don't search
-		if (root.data == father)
+		if (father == NULL || root.data == father)
 		{
-			root.AppendSons(data);
+			root.AppendSons(new TreeNode<TYPE>(data, root));
 			return true;
 		}
 		else
@@ -187,10 +185,10 @@ public:
 			//where we add the new node
 			TreeNode<TYPE>* f = root.Find(father);
 
-			if (father != NULL)
+			if (f != NULL)
 			{
 				//append son to tree
-				f->AppendSon(new TreeNode<TYPE>(data))
+				f->AppendSon(new TreeNode<TYPE>(data, father))
 					return true;
 			}
 		}
