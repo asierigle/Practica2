@@ -129,6 +129,25 @@ public:
 	}
 
 	/**
+	* returns the first apperance of data as index (-1 if not found)
+	*/
+	int find(const tdata& data)
+	{
+		p2List_item<tdata>* tmp = start;
+		int index = 0;
+
+		while (tmp != NULL)
+		{
+			if (tmp->data == data)
+				return(index);
+
+			++index;
+			tmp = tmp->next;
+		}
+		return (-1);
+	}
+
+	/**
 	* Destroy and free all mem
 	*/
 	void clear()
