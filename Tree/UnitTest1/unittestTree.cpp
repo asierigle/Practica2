@@ -5,11 +5,11 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTest1
-{		
+{
 	TEST_CLASS(UnitTestTree)
 	{
 	public:
-		
+
 		TEST_METHOD(Tree_Add)
 		{
 			Tree<int> tree(0);
@@ -17,15 +17,6 @@ namespace UnitTest1
 			tree.Add(100, 0);
 			tree.Add(200, 0);
 			tree.Add(300, 0);
-
-			tree.Add(101, 100);
-			tree.Add(102, 100);
-			tree.Add(103, 100);
-
-			tree.Add(210, 200);
-			tree.Add(220, 200);
-
-			tree.Add(221, 220);
 
 			Assert::AreEqual(1, 1);
 		}
@@ -46,10 +37,7 @@ namespace UnitTest1
 
 			tree.Clear();
 
-			p2List<TreeNode<int>*> list;
-			tree.Clear.GatherAll(&list);
-
-			Assert::AreEqual((int)list.count(), 1);
+			Assert::IsTrue(tree.root == NULL);
 		}
 
 		TEST_METHOD(Tree_Preorder_Recursive)
@@ -230,7 +218,6 @@ namespace UnitTest1
 			Assert::AreEqual((char)list[8]->data, 'F');
 		}
 
-		
-
 	};
+
 }

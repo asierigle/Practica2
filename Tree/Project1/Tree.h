@@ -145,16 +145,23 @@ public:
 
 template <class TYPE>
 class Tree{
-private:
+public:
 	TreeNode<TYPE>* root;
 
 public:
 	//Constructors
-	Tree(const TYPE& data)
+	Tree(const TYPE& value)
 	{
 		assert(data);
+		root = new TreeNode<TYPE>;
+		root->data = value;
+		root->father = NULL;
+	}
 
-		root.data = data;
+	Tree(const TYPE& value, const TYPE* parent)
+	{
+		data = value;
+		father = NULL;
 	}
 
 	//Destructor
@@ -195,7 +202,7 @@ public:
 		return false; // father inexistent
 	}
 
-	void Clear(TYPE& node = NULL)
+	void Clear(const TYPE& node = NULL)
 	{
 		if (node == NULL) // Clear all tree
 		{
@@ -255,43 +262,67 @@ public:
 
 	void PostorderIterative(p2List<TYPE> list)
 	{
-		assert(list);
+			assert(list);
 
-		p2Stack<TreeNode<TYPE>*> stack;
-		TreeNode<TYPE>* node;
-		p2List_item<TYPE*>* father;
+			p2Stack<TreeNode<TYPE>*> stack;
+			TreeNode<TYPE>* nodes = &root;
+			TreeNode<TYPE*>* son;
 
-		stack.Push(root);
-
-		while (stack.Pop(node))
-		{
-			list.find(node);
-
-			for (father = node->sons.end; father != NULL; father = father->prev)
+			while (true)
 			{
-				stack.Push(father);
+				while (nodes != NULL)
+				{
+					stack.Push(nodes); // travel through the first child of every node
+					nodes = nodes->son.start;
+				}
+
+				if (stack.Pop(nodes))
+				{
+					list.Add(nodes->data);
+
+					// now we get the next child
+					if (nodes->father != NULL)
+					{
+						son = nodes->father->sons.start;
+
+						while (son->data != nodes) // travel through childs's list until we find node
+						{
+							son = son->next;
+						}
+
+						if (son->next != NULL) // if child is not the last one, we assign node to the next child's data
+						{
+							nodes = son->next->data;
+						}
+
+						else // if we checked the last child, we set node to NULL so the next Pop pop's the node's father
+						{
+							nodes = NULL;
+						}
+					}
+					else{ break; } // if the node's parent is null, means that node we added is the tree's root
+				}
+				else{ break; } // if stack is empty, means we added all nodes' datas to the list
 			}
-			
 		}
-	}
 
 	void InorderIterative(p2List<TYPE> list)
 	{
 		assert(list);
 
 		p2Stack<TreeNode<TYPE>*> stack;
-		TreeNode<TYPE>* node;
-		p2List_item<TYPE*>* father;
+		TreeNode<TYPE>* nodes = &root;
+		TreeNode<TYPE*>* son;
 
 		stack.Push(root);
 
 		while (stack.Pop(node))
 		{
-			list.find(node);
+			list.Add(nodes->data);
 
 			for (father = node->sons.end; father != NULL; father = father->prev)
 			{
-				stack.Push(father);
+				
 			}
 
 		}
