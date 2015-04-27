@@ -275,5 +275,27 @@ public:
 		}
 	}
 
+	void InorderIterative(p2List<TYPE> list)
+	{
+		assert(list);
+
+		p2Stack<TreeNode<TYPE>*> stack;
+		TreeNode<TYPE>* node;
+		p2List_item<TYPE*>* father;
+
+		stack.Push(root);
+
+		while (stack.Pop(node))
+		{
+			list.find(node);
+
+			for (father = node->sons.end; father != NULL; father = father->prev)
+			{
+				stack.Push(father);
+			}
+
+		}
+	}
+
 };
 #endif
