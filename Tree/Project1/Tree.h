@@ -150,9 +150,10 @@ public:
 
 public:
 	//Constructors
+	Tree(const TYPE& data) : root(data){}
+
 	Tree(const TYPE& value)
 	{
-		assert(data);
 		root = new TreeNode<TYPE>;
 		root->data = value;
 		root->father = NULL;
@@ -216,21 +217,21 @@ public:
 		}
 	}
 
-	void PreorderRecursive(p2List<TYPE> list)
+	void PreorderRecursive(p2List<TreeNode<TYPE>*>* list)
 	{
 		assert(list);
 		
 		root._PreorderRecursive(list);
 	}
 
-	void InorderRecursive(p2List<TYPE> list)
+	void InorderRecursive(p2List<TreeNode<TYPE>*>* list)
 	{
 		assert(list);
 
 		root._InorderRecursive(list);
 	}
 
-	void PostorderRecursive(p2List<TYPE> list)
+	void PostorderRecursive(p2List<TreeNode<TYPE>*>* list)
 	{
 		assert(list);
 
@@ -238,7 +239,7 @@ public:
 	}
 
 
-	void PreorderIterative(p2List<TYPE> list)
+	void PreorderIterative(p2List<TreeNode<TYPE>*>* list)
 	{
 		assert(list);
 
@@ -260,7 +261,7 @@ public:
 		}
 	}
 
-	void PostorderIterative(p2List<TYPE> list)
+	void PostorderIterative(p2List<TreeNode<TYPE>*>* list)
 	{
 			assert(list);
 
@@ -306,7 +307,7 @@ public:
 			}
 		}
 
-	void InorderIterative(p2List<TYPE> list)
+	void InorderIterative(p2List<TreeNode<TYPE>*>* list)
 	{
 		assert(list);
 
