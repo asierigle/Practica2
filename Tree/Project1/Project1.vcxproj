@@ -67,6 +67,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="P2DynArray.h" />
     <ClInclude Include="p2List.h" />
     <ClInclude Include="p2Stack.h" />
     <ClInclude Include="Tree.h" />

@@ -131,7 +131,7 @@ public:
 	/**
 	* read / write operator access directly to a position in the list
 	*/
-	tdata& operator  [](const unsigned int index)
+	const tdata& operator  [](unsigned int index) const
 	{
 		long                  pos;
 		p2List_item<tdata>*   p_item;
@@ -149,7 +149,7 @@ public:
 			p_item = p_item->next;
 		}
 
-		ASSERT(p_item);
+		ASSSERT(p_item);
 
 		return(p_item->data);
 	}
@@ -171,6 +171,39 @@ public:
 			tmp = tmp->next;
 		}
 		return (-1);
+	}
+
+	void swap(tdata& a, tdata& b)
+	{
+		p2List_item<tdata>* tmp = a;
+		
+
+	}
+
+	void Bubble()
+	{
+		bool swapped = true;
+		int ret = 0;
+		
+
+		while (swapped)
+		{
+			swapped = false;
+			p2List_item<tdata>* tmp = start;
+
+			while (tmp != NULL && tmp->next = NULL)
+			{
+				ret++;
+				if (tmp->data > tmp->next->data)
+				{
+					swap(tmp->data, tmp->next->data);
+					swapped = true;
+				}
+				tmp = tmp->next;
+			}
+
+		}
+		return ret;
 	}
 
 	/**

@@ -152,12 +152,7 @@ public:
 	//Constructors
 	Tree(const TYPE& data) : root(data){}
 
-	Tree(const TYPE& value)
-	{
-		root = new TreeNode<TYPE>;
-		root->data = value;
-		root->father = NULL;
-	}
+	
 
 	Tree(const TYPE& value, const TYPE* parent)
 	{
